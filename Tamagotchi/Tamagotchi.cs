@@ -14,33 +14,42 @@ public class Tamagotchi
     }
     public void Feed()
     {
-        hunger -= 40;
-        Console.WriteLine($"Hunger = {hunger}");
+        hunger -= 10;
     }
-    public void GetAlive()
+    public bool GetAlive()
     {
-        if (isAlive == true){
-            Console.WriteLine("Den lever");
-        }
-        else{
-            Console.WriteLine("Den död");
-        }
+        return isAlive;
     }
     private void ReduceBoredom()
     {
-        boredom -= 40;
+        boredom -= 4;
     }
     public void Tick()
     {
-        boredom += 5;
+        boredom += 3;
         hunger += 8;
-        if (boredom == 100 || hunger == 100)
+        if (boredom >= 100 || hunger >= 100)
         {
             isAlive = false;
         }
     }
     public void TeachWord(string word)
     {
-       
+        words.Add (word);
+        if (boredom > 3)
+        {
+            ReduceBoredom();
+
+        }
+        return;
+    }
+    public void Hi()
+    {
+        int wordNum = generator.Next(words.Count);
+        Console.WriteLine($"{name} säger: {words[wordNum]}");
+        if (boredom > 3)
+        {
+            ReduceBoredom();
+        }
     }
 }
