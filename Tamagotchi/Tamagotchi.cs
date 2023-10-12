@@ -2,7 +2,7 @@ public class Tamagotchi
 {
     int hunger = 0;
     int boredom = 0;
-    List<string> words = new() {"Tjockis"};
+    List<string> words = new() {"Hej"};
     bool isAlive = true;
     Random generator = new Random();
     public string name;
@@ -10,7 +10,7 @@ public class Tamagotchi
 
     public void PrintStats()
     {
-        Console.WriteLine($"Hunger = {hunger} || Boredom = {boredom} || Vocabulary: {words.Count} words");
+        Console.WriteLine($"Hunger = {hunger} || Boredom = {boredom} || Ordförråd: {words.Count} ord");
     }
     public void Feed()
     {
@@ -22,12 +22,12 @@ public class Tamagotchi
     }
     private void ReduceBoredom()
     {
-        boredom -= 4;
+        boredom -= 6;
     }
     public void Tick()
     {
-        boredom += 3;
-        hunger += 8;
+        boredom += generator.Next(5);
+        hunger += generator.Next(10);
         if (boredom >= 100 || hunger >= 100)
         {
             isAlive = false;
